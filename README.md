@@ -9,10 +9,8 @@ You can use this library to access the DaartAds APIs.
 #### You may install this library using the NuGet Package installer.
 
  #### Manual installation:
- - Open the repository using Visual Studio after cloning it.
- - Build project, then Navigate to ```[PROJECT HOME]/bin/debug/```.
- - On that folder, copy the ```DaartAds.dll``` file.
- - Go to your current project > Dependencies > Add Project Reference > Browse > Browse Button (Bottom right corner).
+ - Download ```DaartAds.dll``` from the most recent release (current [```1.0.1```](https://github.com/daart-agency/DaartAds-CS/releases/tag/1.0.1)).
+ - Go to your project > Dependencies > Add Project Reference > Browse > Browse Button (Bottom right corner).
  - Add ```DaartAds.dll``` to your project.
 ## Usage
 ```cs

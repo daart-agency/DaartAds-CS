@@ -4,17 +4,20 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>Javadi.DaartAgency.DaartAds</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>javadi</Authors>
     <Company>Daart Agency</Company>
     <Description>Smart Ads C# Library by Daart Company
 
 </Description>
     <Copyright>MIT</Copyright>
-    <PackageProjectUrl>https://github.com/aljvdi/daartads_cs</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/daart-agency/DaartAds-CS</PackageProjectUrl>
     <PackageIcon>daartads-logo.png</PackageIcon>
     <PackageTags>daart ads, daart, daartads library</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/daart-agency/DaartAds-CS</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +29,13 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
