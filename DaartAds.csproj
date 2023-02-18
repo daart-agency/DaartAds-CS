@@ -1,23 +1,24 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>Javadi.DaartAgency.DaartAds</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
     <Authors>javadi</Authors>
     <Company>Daart Agency</Company>
     <Description>Smart Ads C# Library by Daart Company
 
 </Description>
     <Copyright>MIT</Copyright>
-    <PackageProjectUrl>https://github.com/daart-agency/DaartAds-CS</PackageProjectUrl>
+    <PackageProjectUrl>https://daartads.com/</PackageProjectUrl>
     <PackageIcon>daartads-logo.png</PackageIcon>
     <PackageTags>daart ads, daart, daartads library</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/daart-agency/DaartAds-CS</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <Title>Daart ADS Library</Title>
   </PropertyGroup>
 
   <ItemGroup>

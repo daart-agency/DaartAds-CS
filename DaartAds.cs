@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Net;
-using System.Text;
 using System.IO;
-using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
 namespace Javadi.DaartAgency
@@ -19,39 +17,27 @@ namespace Javadi.DaartAgency
         public DaartAds(string token)
         {
             _token = token;
-            _API_URL = "https://daartads.com/advertising/apiAdv4.php";
+            _API_URL = "https://api.daartads.com/api/v1/GetAds";
         }
 
-        private string HttpRequest(string url, Dictionary<string, string> data)
+        private string HttpRequest(string url)
         {
             try
             {
                 var request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "GET";
+                request.ContentLength = 0;
+                request.Accept = "application/json";
+                request.Headers.Add(HttpRequestHeader.Authorization, $"Bearer {_token}");
 
-                string PostFields = "";
-                foreach (var param in data)
-                {
-                    PostFields += $"{param.Key}={param.Value}&";
-                }
-                var PostData = Encoding.ASCII.GetBytes(PostFields);
-
-                request.Method = "POST";
-              
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.ContentLength = PostData.Length;
-
-                using (var stream = request.GetRequestStream())
-                {
-                    stream.Write(PostData, 0, PostData.Length);
-                }
-
-               return new StreamReader(((HttpWebResponse)request.GetResponse()).GetResponseStream()).ReadToEnd();
+                return new StreamReader(((HttpWebResponse)request.GetResponse()).GetResponseStream() ??
+                                        throw new NullReferenceException()).ReadToEnd();
             }
             catch (WebException we)
             {
-                if(((HttpWebResponse)we.Response).StatusCode == HttpStatusCode.Forbidden)
+                if (((HttpWebResponse)we.Response).StatusCode == HttpStatusCode.Unauthorized)
                 {
-                    throw new Exception("Token Not valid");
+                    throw new Exception("Token is not valid");
                 }
             }
 
@@ -59,29 +45,13 @@ namespace Javadi.DaartAgency
         }
 
         /// <summary>
-        /// 
+        /// Get Ads
         /// </summary>
-        /// <param name="AdSize">Select the ad size ID that appears on the API docs.</param>
+        /// <param name="forMobile">Do you want to show advertisements on mobile?</param>
         /// <returns>List of details about ads</returns>
-        public JToken GetAds(string AdSize)
+        public JToken GetAds(bool forMobile = false)
         {
-           return JObject.Parse(HttpRequest(_API_URL, new Dictionary<string, string>
-            {
-                  { "token", _token},
-                  { "adsize", AdSize }
-            })).SelectToken("data");
-        }
-
-        /// <summary>
-        /// Make Ad Callback URL
-        /// </summary>
-        /// <param name="Cid">Click ID (Obtain from GetAds() Method)</param>
-        /// <param name="Source">Your ID (Obtain from GetAds() Method)</param>
-        /// <param name="adSize">Chosen Ad size</param>
-        /// <returns>URL for Callback</returns>
-        public string GetAdCallBack(int Cid,int Source, string adSize)
-        {
-            return $"https://daartads.com/CP.php?Cid={Cid}&Source={Source}&adsize={adSize}";
+           return JObject.Parse(HttpRequest(forMobile ? $"{_API_URL}?forMobile" : _API_URL)).SelectToken("Result");
         }
 
     }
